@@ -1,0 +1,37 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="w-100 h-100">
+  <nz-card fxFlex="0 1 auto" [style.width.px]="300" nzTitle="Log In">
+    <form nz-form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <label for="username">Username</label>
+          <nz-input-group nzPrefixIcon="user">
+            <input name="username" type="email" formControlName="username" autocomplete="email" nz-input
+              placeholder="Enter your email or username" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <label for="password">Password</label>
+          <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixIconSearch">
+            <input autocomplete="current-password" name="password" formControlName="password"
+              [type]="showPassword ?  'text' : 'password'" nz-input placeholder="Password" />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i class="pointer" (click)="changePasswordVisibility()" nz-icon
+              [nzType]="showPassword ? 'eye-invisible' : 'eye'" nzTheme="outline"></i>
+          </ng-template>
+          <a class="login-form-forgot">Forgot password</a>
+        </nz-form-control>
+
+      </nz-form-item>
+      <button nz-button type="submit" class="login-form-button login-form-margin w-100" [disabled]="loginForm.disabled"
+        [nzType]="'primary'">Log
+        in</button>
+      <nz-divider nzText="Or Join us with" nzType="horizontal"></nz-divider>
+      <app-social-button></app-social-button>
+      <a class="login-form-forgot" routerLink="/auth/register">Don't have an account? Register here</a>
+    </form>
+  </nz-card>
+
+</div>

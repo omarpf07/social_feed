@@ -1,0 +1,68 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="w-100 h-100">
+  <nz-card fxFlex="0 1 auto" [style.width.px]="300" nzTitle="Sign Up">
+    <form nz-form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Username is required">
+          <label for="username">Username</label>
+          <nz-input-group nzPrefixIcon="user">
+            <input name="username" type="email" formControlName="username" autocomplete="email" nz-input
+              placeholder="Rockstar567" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="emailErrorTpl">
+          <label for="username">E-mail</label>
+          <nz-input-group nzPrefixIcon="mail-o">
+            <input name="email" type="email" formControlName="email" autocomplete="email" nz-input
+              placeholder="example@example.com" />
+            <ng-template #emailErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">Email is required.</ng-container>
+              <ng-container *ngIf="control.hasError('email')">You must enter a valid email address.</ng-container>
+            </ng-template>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <label for="password">Password</label>
+          <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixIconSearch">
+            <input autocomplete="current-password" name="password" formControlName="password"
+              [type]="showPassword ?  'text' : 'password'" nz-input placeholder="Password" />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i class="pointer" (click)="changePasswordVisibility()" nz-icon
+              [nzType]="showPassword ? 'eye-invisible' : 'eye'" nzTheme="outline"></i>
+          </ng-template>
+        </nz-form-control>
+
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="passwordErrorTpl">
+          <label for="password">Confirm Password</label>
+          <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixIconSearch">
+            <input autocomplete="current-password" name="password2" formControlName="password2"
+              [type]="showPassword ?  'text' : 'password'" nz-input placeholder="Password" />
+            <ng-template #passwordErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">Password is required!</ng-container>
+              <ng-container *ngIf="control.hasError('passwordsDontMatch')">Passwords don't match.</ng-container>
+            </ng-template>
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i class="pointer" (click)="changePasswordVisibility()" nz-icon
+              [nzType]="showPassword ? 'eye-invisible' : 'eye'" nzTheme="outline"></i>
+          </ng-template>
+        </nz-form-control>
+
+      </nz-form-item>
+
+      <button nz-button type="submit" class="login-form-button login-form-margin w-100"
+        [disabled]="registerForm.invalid || registerForm.disabled" [nzType]="'primary'">Join us!</button>
+      <nz-divider nzText="Or Join us with" nzType="horizontal"></nz-divider>
+      <app-social-button></app-social-button>
+      <a class="login-form-forgot">Don't have an account? Register here</a>
+    </form>
+  </nz-card>
+
+</div>
